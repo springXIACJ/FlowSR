@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flowsr"
+version = "0.1.0"
+description = "Minimal inference-only third-party implementation of FlowSR."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "PolyForm Noncommercial License 1.0.0" }
+# Dependency floors track a known-good environment: diffusers 0.36.0, peft 0.18.1,
+# transformers 5.2.0, torch 2.10.0, numpy 2.2.6, pillow 11.3.0, safetensors 0.7.0.
+dependencies = [
+    "diffusers>=0.36.0",
+    "numpy>=2.0",
+    "peft>=0.17.0",
+    "pillow>=11.0",
+    "safetensors>=0.6",
+    "torch>=2.4",
+    "tqdm>=4.66",
+    "transformers>=4.44",
+]
+
+[project.scripts]
+flowsr-infer = "flowsr.infer:main"
+flowsr-metrics = "flowsr.metrics:main"
+
+[project.optional-dependencies]
+metrics = [
+    "pyiqa>=0.1.13",
+]
+
+[tool.setuptools.packages.find]
+include = ["flowsr*"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+src = ["flowsr", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "SIM",  # flake8-simplify
+    "RUF",  # ruff-specific rules
+]
+ignore = [
+    "E501",  # line length is handled by the formatter
+    "B008",  # allow function calls in argument defaults (argparse/CLI patterns)
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests intentionally exercise pure utilities; allow unused imports in __init__-style setup.
+"tests/*" = ["B011"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["flowsr"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
