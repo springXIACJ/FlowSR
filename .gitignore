@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.egg-info/
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+
+# OS
+.DS_Store
+
+# Model checkpoints (weights are downloaded, not committed)
+*.pkl
+*.pt
+*.pth
+*.safetensors
+!checkpoints/.gitkeep
+
+# Project data and outputs
+data/
+outputs/
+metrics/
+
+# Local-only assets (e.g. source PDFs); committed images are kept
+assets/*.pdf
