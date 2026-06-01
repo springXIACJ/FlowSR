@@ -3,7 +3,6 @@ from __future__ import annotations
 import inspect
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 import torch
@@ -12,13 +11,7 @@ from peft import LoraConfig
 from transformers import AutoTokenizer, CLIPTextModel
 
 from flowsr.checkpoint import load_flowsr_checkpoint
-
-
-# The original "stabilityai/stable-diffusion-2-1-base" repository was removed from
-# the Hugging Face Hub. "Manojb/stable-diffusion-2-1-base" is a drop-in re-upload
-# of the same weights and is used as the default base model here.
-DEFAULT_BASE_MODEL = "Manojb/stable-diffusion-2-1-base"
-DEFAULT_FLOW_SCHEDULER_MODEL = "stabilityai/stable-diffusion-3-medium-diffusers"
+from flowsr.defaults import DEFAULT_BASE_MODEL, DEFAULT_FLOW_SCHEDULER_MODEL
 
 
 @dataclass(frozen=True)
@@ -136,7 +129,7 @@ class FlowSRModel(torch.nn.Module):
         self,
         image_tensor: torch.Tensor,
         positive_prompt: list[str],
-        negative_prompt: Optional[list[str]] = None,
+        negative_prompt: list[str] | None = None,
     ) -> torch.Tensor:
         positive = self.encode_prompt(positive_prompt)
         negative = self.encode_prompt(negative_prompt) if self.guidance_scale > 1 and negative_prompt else None
