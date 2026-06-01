@@ -157,27 +157,16 @@ The metric script matches SR and GT images by filename stem, writes a timestampe
 
 ## 🗂️ Benchmarks
 
-For public evaluation examples, use the StableSR test sets hosted on Hugging Face:
+For public evaluation examples, use the **StableSR test sets** hosted on Hugging Face:
 
 - https://huggingface.co/datasets/Iceclear/StableSR-TestSets
 
-The dataset card lists DIV2K_Val, RealSR Val, DRealSR Val, and DPED Val, and is licensed under S-Lab License 1.0.
+The dataset card lists *DIV2K_Val*, *RealSR Val*, *DRealSR Val*, and *DPED Val*, and is licensed under S-Lab License 1.0.
 
 ### Example download command:
 
 ```bash
-uv pip install -U huggingface_hub
-
-hf download Iceclear/StableSR-TestSets \
-  --repo-type dataset \
-  --local-dir data/StableSR-TestSets
-```
-
-Conda equivalent:
-
-```bash
-conda activate flowsr
-pip install -U huggingface_hub
+uv pip install -U huggingface_hub   # or: pip install -U huggingface_hub
 
 hf download Iceclear/StableSR-TestSets \
   --repo-type dataset \
@@ -288,6 +277,7 @@ FlowSR/
 │   └── .gitkeep              # download flowsr.safetensors here
 ├── flowsr/
 │   ├── __init__.py
+│   ├── defaults.py           # shared inference defaults (base model, prompts)
 │   ├── infer.py              # inference CLI + image I/O   (flowsr-infer)
 │   ├── model.py              # FlowSR pipeline: UNet / VAE / text encoder + LoRA
 │   ├── checkpoint.py         # safetensors checkpoint loader
