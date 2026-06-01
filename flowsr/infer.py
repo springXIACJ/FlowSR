@@ -7,20 +7,14 @@ from typing import Iterable
 
 from PIL import Image
 
+from flowsr.defaults import (
+    DEFAULT_BASE_MODEL,
+    DEFAULT_FLOW_SCHEDULER_MODEL,
+    DEFAULT_NEGATIVE_PROMPT,
+    DEFAULT_POSITIVE_PROMPT,
+)
+
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".bmp"}
-# The original "stabilityai/stable-diffusion-2-1-base" repository was removed from
-# the Hugging Face Hub. "Manojb/stable-diffusion-2-1-base" is a drop-in re-upload
-# of the same weights and is used as the default base model here.
-DEFAULT_BASE_MODEL = "Manojb/stable-diffusion-2-1-base"
-DEFAULT_FLOW_SCHEDULER_MODEL = "stabilityai/stable-diffusion-3-medium-diffusers"
-DEFAULT_POSITIVE_PROMPT = (
-    "A high-resolution, 8K, ultra-realistic image with sharp focus, "
-    "vibrant colors, and natural lighting."
-)
-DEFAULT_NEGATIVE_PROMPT = (
-    "oil painting, cartoon, blur, dirty, messy, low quality, deformation, "
-    "low resolution, oversmooth"
-)
 
 
 class CheckpointValidationError(RuntimeError):
